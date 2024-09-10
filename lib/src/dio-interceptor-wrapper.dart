@@ -227,9 +227,12 @@ class SuperTokensInterceptorWrapper extends Interceptor {
         authValue = req.headers["authorization"];
       }
       String? accessToken = await Utils.getTokenForHeaderAuth(TokenType.ACCESS);
-      String? refreshToken = await Utils.getTokenForHeaderAuth(TokenType.REFRESH);
+      String? refreshToken =
+          await Utils.getTokenForHeaderAuth(TokenType.REFRESH);
 
-      if (accessToken != null && refreshToken != null && authValue != "Bearer $accessToken") {
+      if (accessToken != null &&
+          refreshToken != null &&
+          authValue != "Bearer $accessToken") {
         req.headers.remove('Authorization');
         req.headers.remove('authorization');
       }
@@ -256,22 +259,22 @@ class SuperTokensInterceptorWrapper extends Interceptor {
   }
 
   bool shouldRunDioInterceptor(RequestOptions options) {
-    if (SuperTokensUtils.getApiDomain(options.uri.toString()) !=
-        SuperTokens.config.apiDomain) {
-      return false;
-    }
+    // if (SuperTokensUtils.getApiDomain(options.uri.toString()) !=
+    //     SuperTokens.config.apiDomain) {
+    //   return false;
+    // }
 
-    if (SuperTokensUtils.getApiDomain(options.uri.toString()) ==
-        SuperTokens.refreshTokenUrl) {
-      return false;
-    }
+    // if (SuperTokensUtils.getApiDomain(options.uri.toString()) ==
+    //     SuperTokens.refreshTokenUrl) {
+    //   return false;
+    // }
 
-    if (!Utils.shouldDoInterceptions(
-        options.uri.toString(),
-        SuperTokens.config.apiDomain,
-        SuperTokens.config.sessionTokenBackendDomain)) {
-      return false;
-    }
+    // if (!Utils.shouldDoInterceptions(
+    //     options.uri.toString(),
+    //     SuperTokens.config.apiDomain,
+    //     SuperTokens.config.sessionTokenBackendDomain)) {
+    //   return false;
+    // }
 
     return true;
   }

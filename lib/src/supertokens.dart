@@ -65,8 +65,7 @@ class SuperTokens {
       postAPIHook,
     );
 
-    SuperTokens.refreshTokenUrl =
-        config.apiDomain + (config.apiBasePath ?? '') + "/session/refresh";
+    SuperTokens.refreshTokenUrl = config.apiDomain + "/auth/refresh-session";
     SuperTokens.signOutUrl =
         config.apiDomain + (config.apiBasePath ?? '') + "/signout";
     SuperTokens.rid = "session";

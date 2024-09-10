@@ -95,8 +95,7 @@ class Client extends http.BaseClient {
 
         SuperTokensTokenTransferMethod tokenTransferMethod =
             SuperTokens.config.tokenTransferMethod;
-        copiedRequest.headers["st-auth-mode"] =
-            tokenTransferMethod.getValue();
+        copiedRequest.headers["st-auth-mode"] = tokenTransferMethod.getValue();
 
         // Adding Authorization headers
         copiedRequest =
@@ -131,8 +130,8 @@ class Client extends http.BaseClient {
         // Save cookies from the response
         String? setCookieFromResponse =
             response.headers[HttpHeaders.setCookieHeader];
-        await Client.cookieStore?.saveFromSetCookieHeader(
-            copiedRequest.url, setCookieFromResponse);
+        await Client.cookieStore
+            ?.saveFromSetCookieHeader(copiedRequest.url, setCookieFromResponse);
       } finally {
         _refreshAPILock.release();
       }
@@ -208,9 +207,7 @@ class Client extends http.BaseClient {
               preRequestLocalSessionState.status ||
           (postLockLocalSessionState.status == LocalSessionStateStatus.EXISTS &&
               preRequestLocalSessionState.status ==
-                  LocalSessionStateStatus.EXISTS &&
-              postLockLocalSessionState.lastAccessTokenUpdate !=
-                  preRequestLocalSessionState.lastAccessTokenUpdate)) {
+                  LocalSessionStateStatus.EXISTS)) {
         return UnauthorisedResponse(status: UnauthorisedStatus.RETRY);
       }
       Uri refreshUrl = Uri.parse(SuperTokens.refreshTokenUrl);
